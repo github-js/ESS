@@ -14,7 +14,7 @@ ess(model,label,prior,ncov,m,nsim,svec1,svec2)
 \arguments{
   \item{model}{Model specifications. Options are 'betaBin', 'gammaEx', 'dirMult' for conjugate beta-binomial, gamma-exponential, and dirichlet-multinomial models, respectively. For non-conjugate models, options are 'linreg' and 'logistic' for linear regression and logistic regression models, respectively.}
   \item{label}{Optional labeling for hyperparameters.}
-  \item{prior}{Prior distribution specification specified as a list.}
+  \item{prior}{Prior distribution specification specified as a list. Options are 'beta', 'gamma', 'dirichlet', and 'norm' (for normal prior).}
   \item{ncov}{Number of covariates}
   \item{m}{A positive integer specified as an maximum value in which ESS is searched.}
   \item{nsim}{Number of simulations for numerical approximation (specified only for model = 'linreg' or model = 'logistic').}
@@ -45,7 +45,7 @@ ess(model='betaBin',prior=c('beta',1,2))
 
 # Calculating ESS for a gamma-exponential model with
 # gamma(2,2) prior
-ess(model='gammaEx',prior=c('gamma',2,2))
+ess(model='gammaEx',prior=c('gamma',2,3))
 
 # Calculating ESS for a dirichlet-multinomial model with
 # dirichlet(10,15,20) prior
@@ -53,32 +53,32 @@ ess(model='dirMult',prior=c('dirichlet',10,15,20))
 
 # Calculating ESS for a linear regression model with
 # three covariates, with priors specified as
-# alpha ~ N(0,1); beta1 ~ N(0,.1); beta2 ~ N(0,.2); beta3 ~ N(0,.3); tau ~ Gamma(1,1);
+# beta0 ~ N(0,1); beta1 ~ N(0,.1); beta2 ~ N(0,.2); beta3 ~ N(0,.3); tau ~ Gamma(1,1);
 # Smaller nsim = 50 is specified for illustration purposes
 # The user can use nsim = 10,000 to carry out the most accurate ESS computations.
 # The value of nsim as low as 1,000 may be used to reduce runtime.
-ess(model='linreg',label=c('alpha','beta1','beta2','beta3','tau'),
+ess(model='linreg',label=c('beta0','beta1','beta2','beta3','tau'),
 prior=list(c('norm',0,1),c('norm',0,.1),c('norm',0,.2),c('norm',0,.3),c('gamma',1,1)),
 ncov=3,m=50,nsim=50,svec1=c(0,1,1,1,0),svec2=c(0,0,0,0,1))
 
 
 # Calculating ESS for a linear regression model with
 # two covariates, with priors specified as
-# alpha ~ N(0,1); beta1 ~ N(0,.1); beta2 ~ N(0,.2); tau ~ Gamma(1,1);
+# beta0 ~ N(0,1); beta1 ~ N(0,.1); beta2 ~ N(0,.2); tau ~ Gamma(1,1);
 # Smaller nsim = 50 is specified for illustration purposes
 # The user can use nsim = 10,000 to carry out the most accurate ESS computations.
 # The value of nsim as low as 1,000 may be used to reduce runtime.
-ess(model='linreg',label=c('alpha','beta1','beta2','tau'),
+ess(model='linreg',label=c('beta0','beta1','beta2','tau'),
 prior=list(c('norm',0,1),c('norm',0,.1),c('norm',0,.2),c('gamma',1,1)),
 ncov=2,m=50,nsim=50,svec1=c(0,1,1,0),svec2=c(0,0,0,1))
 
 # Calculating ESS for a logistic regression model with
 # three covariates, with priors specified as
-# alpha ~ N(0,1); beta1 ~ N(0,1); beta2 ~ N(0,1); beta3 ~ N(0,1)
+# beta0 ~ N(0,1); beta1 ~ N(0,1); beta2 ~ N(0,1); beta3 ~ N(0,1)
 # Smaller nsim = 50 is specified for illustration purposes
 # The user can use nsim = 10,000 to carry out the most accurate ESS computations.
 # The value of nsim as low as 1,000 may be used to reduce runtime.
-ess(model='logistic',label=c('alpha','beta1','beta2','beta3'),
+ess(model='logistic',label=c('beta0','beta1','beta2','beta3'),
 prior=list(c('norm',0,1),c('norm',0,1),c('norm',0,1),c('norm',0,1)),
 ncov=3,m=50,nsim=50,svec1=c(1,0,0,0),svec2=c(0,1,1,1))
 

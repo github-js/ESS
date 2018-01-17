@@ -1,11 +1,21 @@
 Package: ess
 Type: Package
 Title: Determining Effective Sample Size
-Version: 0.0.1
+Version: 0.0.2
 Author: Jaejoon Song, Satoshi Morita, J. Jack Lee
 Maintainer: Jaejoon Song <jjsong2@mdanderson.org>
 Description: Determines effective sample size of a parametric prior distribution
     in Bayesian models.
+Depends:
+    dfcrm,
+    MCMCpack,
+    MatrixModels,
+    MASS,
+    stats
+Imports:
+    dfcrm,
+    MCMCpack,
+    MatrixModels
 License: License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
